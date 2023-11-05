@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+typedef struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+} Node;
+
+Node* createNode(int value) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+Node* insert(Node *root, int value) {
+    if (root == NULL)
+        return createNode(value);
+
+    if (value < root->data)
+        root->left = insert(root->left, value);
+    else if (value > root->data)
+        root->right = insert(root->right, value);
+
+    return root;
+}
+
+int height(Node* node) {
+    if (node == NULL)
+        return 0;
+    else {
+        int left_height = height(node->left);
+        int right_height = height(node->right);
+
+        if (left_height > right_height)
+            return left_height + 1;
+        else
+            return right_height + 1;
+    }
+}
+
+void printGivenLevel(Node* root, int level) {
+    if (root == NULL)
+        return;
+    if (level == 1)
+        printf("%d ", root->data);
+    else if (level > 1) {
+        printGivenLevel(root->left, level - 1);
+        printGivenLevel(root->right, level - 1);
+    }
+}
+
+void printLevelOrder(Node* root) {
+    int h = height(root);
+    int i;
+    for (i = 1; i <= h; i++) {
+        printf("Level %d: ", i);
+        printGivenLevel(root, i);
+        printf("\n");
+    }
+}
+
+int main() {
+    Node *root = NULL;
+    int n, data;
+
+    printf("Enter the number of integers: ");
+    scanf("%d", &n);
+
+    printf("Enter the integers:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &data);
+        root = insert(root, data);
+    }
+
+    printf("Nodes level wise:\n");
+    printLevelOrder(root);
+
+    getch();
+    return 0;
+}

@@ -2,6 +2,10 @@
   "files.associations": {
     "S1BST.C": "cpp",
     "S1POLY.C": "cpp",
-    "S2CIRCUL.C": "cpp"
+    "S2CIRCUL.C": "cpp",
+    "S6BUBBLE.C": "cpp",
+    "S5LLDIGI.C": "cpp",
+    "S5BST.C": "cpp",
+    "S6BSTPRE.C": "cpp"
   }
 }
